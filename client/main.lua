@@ -49,6 +49,7 @@ AddEventHandler('eden_accesories:use', function( type )
             ESX.ShowNotification(string.format('%s %s', "You've removed your ", type))
         end
     else
+	TriggerServerEvent('eden_accesories:giveBack', type)
         ESX.ShowNotification(string.format('%s %s %s', 'The ', type, " doesn't fit on your weapon.."))
     end
 end)
