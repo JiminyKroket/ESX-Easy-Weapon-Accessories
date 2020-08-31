@@ -1,34 +1,16 @@
+local attachmentTypes = {'suppressor', 'flashlight', 'grip', 'yusuf'}
+
 local ESX = nil
  
 TriggerEvent('esx:getSharedObject', function( obj ) ESX = obj end)
- 
-ESX.RegisterUsableItem('suppressor', function( source )
-	local _source  = source
-	local xPlayer  = ESX.GetPlayerFromId(_source)
-    TriggerClientEvent('eden_accesories:use', source, 'suppressor')
-	xPlayer.removeInventoryItem('suppressor', 1)
-end)
- 
-ESX.RegisterUsableItem('flashlight', function( source )
-	local _source  = source
-	local xPlayer  = ESX.GetPlayerFromId(_source)
-    TriggerClientEvent('eden_accesories:use', source, 'flashlight')
-	xPlayer.removeInventoryItem('flashlight', 1)
-end)
- 
-ESX.RegisterUsableItem('grip', function( source )
-	local _source  = source
-	local xPlayer  = ESX.GetPlayerFromId(_source)
-    TriggerClientEvent('eden_accesories:use', source, 'grip')
-	xPlayer.removeInventoryItem('grip', 1)
-end)
- 
-ESX.RegisterUsableItem('yusuf', function( source )
-	local _source  = source
-	local xPlayer  = ESX.GetPlayerFromId(_source)
-    TriggerClientEvent('eden_accesories:use', source, 'skin')
-	xPlayer.removeInventoryItem('yusuf', 1)
-end)
+
+for i = 1,#attachmentTypes do
+	ESX.RegisterUsableItem(attachmentTypes[i], function(source)
+		local xPlayer = ESX.GetPlayerFromId(source)
+		TriggerClientEvent('eden_accesories:use', xPlayer.source, attachmentType[i])
+		xPlayer.removeInventoryItem(attachmentType[i], 1)
+	end)
+end
 
 RegisterServerEvent('eden_accesories:giveBack')
 AddEventHandler('eden_accesories:giveBack', function(item)
